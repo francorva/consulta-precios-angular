@@ -1,5 +1,5 @@
 
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductoService } from './services/producto';
 import { Producto } from './models/producto.model';
@@ -15,8 +15,8 @@ export class App implements OnInit {
 
   private productoService = inject(ProductoService);
 
-  productos: Producto[] = [];
-  cargando = true;
+  productos = signal<Producto[]>([]);
+  cargando = signal(true);
 
   ngOnInit(): void {
     console.log('🚨 ESTOY EJECUTANDO EL APP.TS NUEVO');
@@ -25,12 +25,12 @@ export class App implements OnInit {
       next: (data) => {
         console.log('RESPUESTA:', data);
 
-        this.productos = data;
-        this.cargando = false;
+        this.productos.set(data);
+        this.cargando.set(false);
       },
       error: (err) => {
         console.error('ERROR:', err);
-        this.cargando = false;
+        this.cargando.set(false);
       }
     });
   }

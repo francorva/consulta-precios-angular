@@ -1,19 +1,21 @@
 <main style="padding: 2rem; font-family: system-ui, sans-serif;">
-  <h2>🚨 Consulta de Precios1</h2>
 
-  <div *ngIf="cargando">
-    <p>⏳ Esperando respuesta del servidor1...</p>
+  <h2>🚨 Consulta de Precios2</h2>
+
+  <div *ngIf="cargando()">
+    <p>⏳ Esperando respuesta del servidor...</p>
   </div>
 
-  <div *ngIf="!cargando && productos.length === 0">
+  <div *ngIf="!cargando() && productos().length === 0">
     <p style="color: #d97706; background: #fef3c7; padding: 1rem; border-radius: 8px;">
       ⚠️ No se pudieron cargar productos. Esperando conexión con la API en Spring Boot.
     </p>
   </div>
 
-  <ul *ngIf="productos.length > 0">
-    <li *ngFor="let prod of productos">
-      <strong>{{ prod.nombre }}</strong> - ${{ prod.precioUnitario }}
+  <ul *ngIf="productos().length > 0">
+    <li *ngFor="let prod of productos()">
+      <strong>{{ prod.nombre }}</strong> - Gs {{ prod.precioUnitario }}
     </li>
   </ul>
+
 </main>
