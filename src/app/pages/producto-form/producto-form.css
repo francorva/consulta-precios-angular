@@ -1,0 +1,135 @@
+.form-container {
+  max-width: 550px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+h2 {
+  margin-bottom: 24px;
+  color: #2c3e50;
+  font-size: 22px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #4a5568;
+  font-size: 14px;
+}
+
+input {
+  padding: 10px 12px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.15);
+}
+
+.error-msg {
+  color: #e53e3e;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.btn-cancelar {
+  color: #4a5568;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.btn-cancelar:hover {
+  text-decoration: underline;
+  color: #2d3748;
+}
+
+.btn-guardar {
+  background-color: #2f855a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-guardar:hover {
+  background-color: #276749;
+}
+
+.btn-volver {
+  display: inline-block;
+  color: #3182ce;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 12px;
+  border: 1px solid #3182ce;
+  border-radius: 6px;
+  transition: all 0.2s;
+  background-color: transparent;
+  margin-bottom: 10px;
+}
+
+.btn-volver:hover {
+  background-color: #3182ce;
+  color: white;
+}
+
+.btn-eliminar {
+  background-color: #e53e3e;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-eliminar:hover {
+  background-color: #c53030;
+}
+.btn-buscar {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  padding: 0 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-buscar:hover {
+  background-color: #2b6cb0;
+}

@@ -1,31 +1,58 @@
-
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router'; // Directiva para habilitar <router-outlet>
 import { ProductoService } from './services/producto';
 import { Producto } from './models/producto.model';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, RouterOutlet], // RouterOutlet declarado aquí
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App implements OnInit {
+export class AppComponent implements OnInit { // Renombrado a AppComponent
 
   private productoService = inject(ProductoService);
 
   productos = signal<Producto[]>([]);
   cargando = signal(true);
+  busqueda = signal('');
+  productosFiltrados = signal<Producto[]>([]);
+
+  // Configuración del filtro de precio
+  precioMinAbsoluto: number = 0;
+  precioMaxAbsoluto: number = 60000000;
+  pasoPrecio: number = 1000;
+
+  precioMinSeleccionado = signal<number>(0);
+  precioMaxSeleccionado = signal<number>(60000000);
+  precioMinAplicado = signal<number>(0);
+  precioMaxAplicado = signal<number>(60000000);
 
   ngOnInit(): void {
-    console.log('🚨 ESTOY EJECUTANDO EL APP.TS NUEVO');
-
     this.productoService.getProductos().subscribe({
       next: (data) => {
-        console.log('RESPUESTA:', data);
+        const productosProcesados = data.map(p => ({
+          ...p,
+          imagen: this.obtenerRutaImagen(p)
+        }));
 
-        this.productos.set(data);
+        this.productos.set(productosProcesados);
+
+        if (productosProcesados.length > 0) {
+          const precios = productosProcesados.map(p => p.precioUnitario);
+          this.precioMinAbsoluto = Math.min(...precios);
+          this.precioMaxAbsoluto = Math.max(...precios);
+
+          this.precioMinSeleccionado.set(this.precioMinAbsoluto);
+          this.precioMaxSeleccionado.set(this.precioMaxAbsoluto);
+          this.precioMinAplicado.set(this.precioMinAbsoluto);
+          this.precioMaxAplicado.set(this.precioMaxAbsoluto);
+        }
+
+        this.filtrarProductos();
         this.cargando.set(false);
       },
       error: (err) => {
@@ -34,5 +61,77 @@ export class App implements OnInit {
       }
     });
   }
-}
 
+  obtenerRutaImagen(producto: any): string {
+    if (!producto.imagen) {
+      return `foto_producto/${producto.codigo}.jpg`;
+    }
+    if (producto.imagen.startsWith('http') || producto.imagen.startsWith('foto_producto/')) {
+      return producto.imagen;
+    }
+    return `foto_producto/${producto.imagen}`;
+  }
+
+  porcentajeMin(): number {
+    const total = this.precioMaxAbsoluto - this.precioMinAbsoluto;
+    if (total === 0) return 0;
+    return ((this.precioMinSeleccionado() - this.precioMinAbsoluto) / total) * 100;
+  }
+
+  porcentajeAncho(): number {
+    const total = this.precioMaxAbsoluto - this.precioMinAbsoluto;
+    if (total === 0) return 100;
+    const dif = this.precioMaxSeleccionado() - this.precioMinSeleccionado();
+    return (dif / total) * 100;
+  }
+
+  onPrecioMinChange(nuevoValor: number): void {
+    if (nuevoValor >= this.precioMaxSeleccionado()) {
+      this.precioMinSeleccionado.set(this.precioMaxSeleccionado() - this.pasoPrecio);
+    } else {
+      this.precioMinSeleccionado.set(nuevoValor);
+    }
+  }
+
+  onPrecioMaxChange(nuevoValor: number): void {
+    if (nuevoValor <= this.precioMinSeleccionado()) {
+      this.precioMaxSeleccionado.set(this.precioMinSeleccionado() + this.pasoPrecio);
+    } else {
+      this.precioMaxSeleccionado.set(nuevoValor);
+    }
+  }
+
+  aplicarFiltroPrecio(): void {
+    this.precioMinAplicado.set(this.precioMinSeleccionado());
+    this.precioMaxAplicado.set(this.precioMaxSeleccionado());
+    this.filtrarProductos();
+  }
+
+  limpiarFiltroPrecio(): void {
+    this.precioMinSeleccionado.set(this.precioMinAbsoluto);
+    this.precioMaxSeleccionado.set(this.precioMaxAbsoluto);
+    this.aplicarFiltroPrecio();
+  }
+
+  buscarProducto(): void {
+    this.filtrarProductos();
+  }
+
+  filtrarProductos(): void {
+    const texto = this.busqueda().trim().toLowerCase();
+
+    const resultado = this.productos().filter(producto => {
+      const coincideTexto = texto === '' ||
+        producto.codigo?.toString().includes(texto) ||
+        producto.nombre.toLowerCase().includes(texto);
+
+      const coincidePrecio =
+        producto.precioUnitario >= this.precioMinAplicado() &&
+        producto.precioUnitario <= this.precioMaxAplicado();
+
+      return coincideTexto && coincidePrecio;
+    });
+
+    this.productosFiltrados.set(resultado);
+  }
+}

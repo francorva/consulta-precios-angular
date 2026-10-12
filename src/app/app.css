@@ -1,0 +1,670 @@
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  background: #f5f6f8;
+  color: #222;
+}
+
+
+/* ==============================
+   CATÁLOGO
+   ============================== */
+
+.catalogo {
+  min-height: 100vh;
+
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+
+/* ==============================
+   ENCABEZADO
+   ============================== */
+
+.encabezado {
+  background: white;
+
+  border-bottom: 1px solid #e5e5e5;
+
+  padding: 22px 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.encabezado h1 {
+  margin: 0;
+
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.encabezado p {
+  margin: 5px 0 0;
+
+  color: #777;
+
+  font-size: 14px;
+}
+
+.consulta-precios {
+  font-size: 14px;
+
+  font-weight: 700;
+
+  color: #555;
+
+  letter-spacing: 0.5px;
+}
+
+
+/* ==============================
+   BUSCADOR
+   ============================== */
+
+.buscador {
+  padding: 20px 40px;
+
+  background: white;
+
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.buscador input {
+  width: 100%;
+
+  max-width: 650px;
+
+  padding: 13px 18px;
+
+  border: 1px solid #d7d7d7;
+
+  border-radius: 6px;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.buscador input:focus {
+  border-color: #888;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+
+/* ==============================
+   CONTENIDO PRINCIPAL
+   ============================== */
+
+.contenido {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 25px;
+
+  padding: 30px 40px;
+}
+
+
+/* ==============================
+   PANEL CATEGORÍAS
+   ============================== */
+
+.panel-categorias {
+  width: 250px;
+
+  min-width: 250px;
+
+  background: white;
+
+  border: 1px solid #e1e1e1;
+
+  border-radius: 6px;
+
+  overflow: hidden;
+}
+
+
+/* ==============================
+   COMPRAR POR
+   ============================== */
+
+.panel-titulo {
+  padding: 18px 20px;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+
+/* ==============================
+   CATEGORÍA
+   ============================== */
+
+.categoria-titulo {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 16px 20px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  color: #444;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+.flecha {
+  font-size: 18px;
+
+  color: #777;
+}
+
+
+/* ==============================
+   LISTA CATEGORÍAS
+   ============================== */
+
+.lista-categorias {
+  max-height: 400px;
+
+  overflow-y: auto;
+
+  padding: 8px 0;
+}
+
+
+/* Scroll */
+
+.lista-categorias::-webkit-scrollbar {
+  width: 6px;
+}
+
+.lista-categorias::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+.lista-categorias::-webkit-scrollbar-thumb {
+  background: #ccc;
+
+  border-radius: 10px;
+}
+
+
+/* ==============================
+   CATEGORÍA ITEM
+   ============================== */
+
+.categoria-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 10px 18px;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  transition: background 0.2s;
+}
+
+.categoria-item:hover {
+  background: #f7f7f7;
+}
+
+
+/* Flecha */
+
+.flecha-item {
+  width: 14px;
+
+  color: #777;
+
+  font-size: 14px;
+
+  text-align: center;
+}
+
+
+/* Checkbox */
+
+.categoria-item input {
+  width: 15px;
+
+  height: 15px;
+
+  cursor: pointer;
+}
+
+
+/* Texto */
+
+.categoria-item span:last-child {
+  color: #333;
+}
+
+
+/* ==============================
+   PRODUCTOS
+   ============================== */
+
+.productos {
+  flex: 1;
+
+  min-width: 0;
+}
+
+
+/* ==============================
+   HEADER PRODUCTOS
+   ============================== */
+
+.productos-header {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+}
+
+.productos-header h2 {
+  margin: 0;
+
+  font-size: 22px;
+}
+
+.productos-header span {
+  color: #777;
+
+  font-size: 14px;
+}
+
+
+/* ==============================
+   GRID
+   ============================== */
+
+.grid-productos {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(220px, 1fr)
+    );
+
+  gap: 20px;
+}
+
+
+/* ==============================
+   TARJETA
+   ============================== */
+
+.producto-card {
+  background: white;
+
+  border: 1px solid #e4e4e4;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.producto-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ==============================
+   IMAGEN
+   ============================== */
+
+.producto-imagen {
+  height: 170px;
+
+  background: #f7f7f7;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 50px;
+
+  border-bottom: 1px solid #eeeeee;
+}
+
+
+/* ==============================
+   INFORMACIÓN
+   ============================== */
+
+.producto-info {
+  padding: 16px;
+}
+
+.producto-codigo {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #888;
+
+  font-size: 12px;
+}
+
+.producto-info h3 {
+  margin: 0 0 12px;
+
+  font-size: 16px;
+
+  line-height: 1.4;
+
+  min-height: 45px;
+}
+
+.precio {
+  margin: 0 0 8px;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  color: #16a34a;
+}
+
+.stock {
+  margin: 0;
+
+  color: #777;
+
+  font-size: 13px;
+}
+
+
+/* ==============================
+   CARGANDO
+   ============================== */
+
+.estado {
+  background: white;
+
+  border: 1px solid #e5e5e5;
+
+  border-radius: 8px;
+
+  padding: 40px;
+
+  text-align: center;
+
+  color: #777;
+}
+
+/* ==============================
+   FILTRO DE PRECIO (NUEVO)
+   ============================== */
+
+.filtro-precio-seccion {
+  padding: 16px 20px;
+  background-color: #f3f6fc;
+  border-top: 1px solid #eeeeee;
+}
+
+.filtro-precio-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.filtro-precio-titulo {
+  font-size: 18px;
+  font-weight: 700;
+  color: #111;
+}
+
+.btn-limpiar {
+  background: none;
+  border: none;
+  color: #2554a3;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+.btn-limpiar:hover {
+  text-decoration: underline;
+}
+
+.filtro-precio-subtitulo {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 16px;
+}
+
+/* Slider de Rango Doble */
+.range-slider-container {
+  position: relative;
+  height: 4px;
+  background-color: #d1d5db;
+  margin: 20px 0 15px;
+  border-radius: 2px;
+}
+
+.slider-track {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #173b5e !important;
+  border-radius: 2px;
+  z-index: 1;
+}
+/* 2. Círculos para Chrome, Edge y Safari */
+.range-slider-container input[type="range"]::-webkit-slider-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #173b5e !important;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* 3. Círculos para Firefox */
+.range-slider-container input[type="range"]::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #173b5e !important;
+  pointer-events: auto;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.range-slider-container input[type="range"] {
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  top: 0;
+  left: 0;
+  background: none;
+  pointer-events: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+  outline: none;
+}
+
+/* Deslizadores redondos */
+.range-slider-container input[type="range"]::-webkit-slider-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #1d4ed8;
+  pointer-events: auto;
+  -webkit-appearance: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.range-slider-container input[type="range"]::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #1d4ed8;
+  pointer-events: auto;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Valores Mínimo y Máximo */
+.range-values {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+  margin-bottom: 16px;
+}
+
+/* Botón Aceptar */
+.btn-aceptar-precio {
+  width: 100%;
+  padding: 10px;
+  background-color: #173b5e; /* 👈 Este es el color azul del botón */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-family: inherit;
+}
+
+.btn-aceptar-precio:hover {
+  background-color: #173b5e; /* 👈 Cambia este color para la línea */
+}
+
+
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
+@media (max-width: 900px) {
+
+  .contenido {
+    padding: 20px;
+  }
+
+  .panel-categorias {
+    width: 220px;
+
+    min-width: 220px;
+  }
+
+  .encabezado,
+  .buscador {
+    padding-left: 20px;
+
+    padding-right: 20px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+
+  .contenido {
+    flex-direction: column;
+  }
+
+  .panel-categorias {
+    width: 100%;
+
+    min-width: 100%;
+  }
+
+  .lista-categorias {
+    max-height: 250px;
+  }
+
+  .encabezado {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 10px;
+    }
+
+  .grid-productos {
+    grid-template-columns:
+      repeat(
+        auto-fill,
+        minmax(180px, 1fr)
+      );
+  }
+
+}

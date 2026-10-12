@@ -1,21 +1,8 @@
-<main style="padding: 2rem; font-family: system-ui, sans-serif;">
+<!-- Barra de navegación superior -->
+<nav style="background: #2d3748; padding: 10px 20px; display: flex; gap: 20px;">
+  <a routerLink="/" style="color: white; text-decoration: none; font-size: 14px; font-weight: 500;">🛍️ Ver Catálogo</a>
+  <a routerLink="/admin/productos/nuevo" style="color: white; text-decoration: none; font-size: 14px; font-weight: 500;">⚙️ Administrar / Nuevo</a>
+</nav>
 
-  <h2>🚨 Consulta de Precios2</h2>
-
-  <div *ngIf="cargando()">
-    <p>⏳ Esperando respuesta del servidor...</p>
-  </div>
-
-  <div *ngIf="!cargando() && productos().length === 0">
-    <p style="color: #d97706; background: #fef3c7; padding: 1rem; border-radius: 8px;">
-      ⚠️ No se pudieron cargar productos. Esperando conexión con la API en Spring Boot.
-    </p>
-  </div>
-
-  <ul *ngIf="productos().length > 0">
-    <li *ngFor="let prod of productos()">
-      <strong>{{ prod.nombre }}</strong> - Gs {{ prod.precioUnitario }}
-    </li>
-  </ul>
-
-</main>
+<!-- AQUÍ ES DONDE SE CARGA EL CATÁLOGO -->
+<router-outlet></router-outlet>

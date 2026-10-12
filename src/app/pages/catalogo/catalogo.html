@@ -1,0 +1,177 @@
+<main class="catalogo">
+
+  <!-- ENCABEZADO -->
+  <header class="encabezado">
+    <div>
+      <h1>🛒 Mi Tienda</h1>
+      <p>Catálogo de productos</p>
+    </div>
+    <div>
+      <a routerLink="/admin/productos/nuevo" class="btn-admin-nav">
+        ⚙️ Administrar / Nuevo
+      </a>
+    </div>
+  </header>
+
+  <!-- BUSCADOR -->
+  <section class="buscador">
+    <input
+      type="text"
+      placeholder="🔍 Buscar producto..."
+      [ngModel]="busqueda()"
+      (ngModelChange)="busqueda.set($event); buscarProducto()"
+    />
+  </section>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <section class="contenido">
+
+    <!-- PANEL DE CATEGORÍAS -->
+    <aside class="panel-categorias">
+      <div class="panel-titulo">
+        COMPRAR POR
+      </div>
+
+      <div class="categoria-titulo">
+        <span>CATEGORÍA</span>
+        <span class="flecha">⌃</span>
+      </div>
+
+      <div class="lista-categorias">
+        <label class="categoria-item">
+          <span class="flecha-item">⌄</span>
+          <input type="checkbox">
+          <span>Informática</span>
+        </label>
+        <label class="categoria-item">
+          <span class="flecha-item">⌄</span>
+          <input type="checkbox">
+          <span>Electrónica</span>
+        </label>
+        <label class="categoria-item">
+          <span class="flecha-item">⌄</span>
+          <input type="checkbox">
+          <span>Fotografía</span>
+        </label>
+        <label class="categoria-item">
+          <span class="flecha-item">⌄</span>
+          <input type="checkbox">
+          <span>Salud y Belleza</span>
+        </label>
+        <label class="categoria-item">
+          <span class="flecha-item">⌄</span>
+          <input type="checkbox">
+          <span>Automotriz</span>
+        </label>
+        <label class="categoria-item">
+          <span class="flecha-item">⌄</span>
+          <input type="checkbox">
+          <span>Deportes</span>
+        </label>
+        <label class="categoria-item">
+          <span class="flecha-item">⌄</span>
+          <input type="checkbox">
+          <span>Juguetes</span>
+        </label>
+        <label class="categoria-item">
+          <span class="flecha-item">⌄</span>
+          <input type="checkbox">
+          <span>Promociones</span>
+        </label>
+      </div>
+
+      <!-- SECCIÓN DE FILTRO POR PRECIO -->
+      <div class="filtro-precio-seccion">
+        <div class="filtro-precio-header">
+          <span class="filtro-precio-titulo">Filtros</span>
+          <button type="button" class="btn-limpiar" (click)="limpiarFiltroPrecio()">
+            Limpiar
+          </button>
+        </div>
+
+        <div class="filtro-precio-subtitulo">
+          Precio
+        </div>
+
+        <!-- Slider de Rango Doble -->
+        <div class="range-slider-container">
+          <div class="slider-track"
+               [style.left.%]="porcentajeMin()"
+               [style.width.%]="porcentajeAncho()"
+               style="background-color: #173b5e;">
+          </div>
+
+          <input
+            type="range"
+            [min]="precioMinAbsoluto"
+            [max]="precioMaxAbsoluto"
+            [step]="pasoPrecio"
+            [ngModel]="precioMinSeleccionado()"
+            (ngModelChange)="onPrecioMinChange($event)"
+          />
+
+          <input
+            type="range"
+            [min]="precioMinAbsoluto"
+            [max]="precioMaxAbsoluto"
+            [step]="pasoPrecio"
+            [ngModel]="precioMaxSeleccionado()"
+            (ngModelChange)="onPrecioMaxChange($event)"
+          />
+        </div>
+
+        <!-- Valores formateados -->
+        <div class="range-values">
+          <span>{{ precioMinSeleccionado() | currency:'PYG':'':'1.0-0' }}</span>
+          <span>{{ precioMaxSeleccionado() | currency:'PYG':'':'1.0-0' }}</span>
+        </div>
+
+        <!-- Botón Aceptar -->
+        <button type="button" class="btn-aceptar-precio" (click)="aplicarFiltroPrecio()">
+          Aceptar
+        </button>
+      </div>
+    </aside>
+
+    <!-- CATÁLOGO DE PRODUCTOS -->
+    <section class="productos">
+      <div class="productos-header">
+        <h2>Productos</h2>
+        <span *ngIf="!cargando()">
+          {{ productosFiltrados().length }} productos
+        </span>
+      </div>
+
+      <!-- CARGANDO -->
+      <div class="estado" *ngIf="cargando()">
+        <p>⏳ Cargando productos...</p>
+      </div>
+
+      <!-- PRODUCTOS -->
+      <div class="grid-productos" *ngIf="!cargando()">
+        <article class="producto-card" *ngFor="let producto of productosFiltrados()">
+          <!-- IMAGEN -->
+          <!-- IMAGEN -->
+          <div class="producto-imagen">
+            <img [src]="'http://localhost:8081/foto_producto/' + producto.imagen" [alt]="producto.nombre">
+          </div>
+
+          <!-- INFORMACIÓN -->
+          <div class="producto-info">
+            <span class="producto-codigo">
+              Código: {{ producto.codigo }}
+            </span>
+            <h3>{{ producto.nombre }}</h3>
+            <p class="precio">
+              {{ producto.precioUnitario | currency:'PYG':'Gs ':'1.0-0' }}
+            </p>
+            <p class="stock">
+              Stock disponible: {{ producto.stock }}
+            </p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </section>
+</main>
