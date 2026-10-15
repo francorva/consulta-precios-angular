@@ -157,7 +157,9 @@
         <article class="producto-card" *ngFor="let producto of productosFiltrados()">
           <!-- IMAGEN -->
           <div class="producto-imagen">
-            <img [src]=<img [src]="'/foto_producto/' + producto.imagen" [alt]="producto.nombre">
+            @if (producto.imagen) {
+            <img [src]="'/foto_producto/' + producto.imagen" [alt]="producto.nombre">
+            }
           </div>
 
           <!-- INFORMACIÓN -->
