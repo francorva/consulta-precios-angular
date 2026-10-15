@@ -1,0 +1,84 @@
+.carrito-container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.carrito-container h2 {
+  margin-bottom: 20px;
+  color: #173b5e;
+}
+
+.item-carrito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.item-info h4 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+
+.item-acciones {
+  text-align: right;
+}
+
+.subtotal {
+  font-weight: bold;
+  color: #2e7d32;
+  margin-bottom: 5px;
+}
+
+.btn-eliminar {
+  background: #ffebee;
+  color: #c62828;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.carrito-resumen {
+  margin-top: 25px;
+  text-align: right;
+  border-top: 2px solid #eee;
+  padding-top: 20px;
+}
+
+.botones-acciones {
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn-vaciar {
+  background: #f5f5f5;
+  color: #666;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-whatsapp {
+  background: #25d366;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.btn-whatsapp:hover {
+  background: #1ebe5d;
+}

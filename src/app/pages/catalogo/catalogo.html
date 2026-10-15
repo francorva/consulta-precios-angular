@@ -6,7 +6,12 @@
       <h1>🛒 Mi Tienda</h1>
       <p>Catálogo de productos</p>
     </div>
-    <div>
+    <div style="display: flex; gap: 10px; align-items: center;">
+      <!-- BOTÓN PARA IR AL CARRITO -->
+      <a routerLink="/carrito" class="btn-admin-nav" style="background-color: #2e7d32; color: white; text-decoration: none; padding: 8px 15px; border-radius: 6px; display: inline-flex; align-items: center; gap: 5px;">
+        🛒 Ver Carrito
+      </a>
+
       <a routerLink="/admin/productos/nuevo" class="btn-admin-nav">
         ⚙️ Administrar / Nuevo
       </a>
@@ -151,9 +156,8 @@
       <div class="grid-productos" *ngIf="!cargando()">
         <article class="producto-card" *ngFor="let producto of productosFiltrados()">
           <!-- IMAGEN -->
-          <!-- IMAGEN -->
           <div class="producto-imagen">
-            <img [src]="'http://localhost:8081/foto_producto/' + producto.imagen" [alt]="producto.nombre">
+            <img [src]=<img [src]="'/foto_producto/' + producto.imagen" [alt]="producto.nombre">
           </div>
 
           <!-- INFORMACIÓN -->
@@ -168,6 +172,11 @@
             <p class="stock">
               Stock disponible: {{ producto.stock }}
             </p>
+
+            <!-- BOTÓN AGREGAR AL CARRITO -->
+            <button class="btn-agregar-carrito" (click)="agregarAlCarrito(producto)">
+              🛒 Agregar al Carrito
+            </button>
           </div>
         </article>
       </div>

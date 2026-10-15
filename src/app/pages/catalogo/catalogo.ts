@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { ProductoService } from '../../services/producto';
+import { CartService } from '../../services/cart'; // <--- Importamos el servicio del carrito
 import { Producto } from '../../models/producto.model';
 
 @Component({
@@ -14,6 +15,7 @@ import { Producto } from '../../models/producto.model';
 })
 export class CatalogoComponent implements OnInit {
   private productoService = inject(ProductoService);
+  private cartService = inject(CartService); // <--- Inyectamos el servicio del carrito
 
   // Estados con Signals
   productos = signal<Producto[]>([]);
@@ -66,6 +68,17 @@ export class CatalogoComponent implements OnInit {
       return coincideNombre && coincidePrecio;
     });
   });
+
+  // Método para agregar al carrito usando las propiedades reales del modelo
+  agregarAlCarrito(producto: any): void {
+      this.cartService.agregarProducto({
+        id: producto.id || producto.idProducto || producto.codigo, // Busca la propiedad que exista
+        nombre: producto.nombre,
+        precio: producto.precioUnitario,
+        cantidad: 1
+      });
+      alert(`¡"${producto.nombre}" agregado al carrito!`);
+    }
 
   // Métodos del Slider de Precio
   porcentajeMin = computed(() => {

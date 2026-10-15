@@ -1,7 +1,23 @@
 <!-- Barra de navegación superior -->
-<nav style="background: #2d3748; padding: 10px 20px; display: flex; gap: 20px;">
-  <a routerLink="/" style="color: white; text-decoration: none; font-size: 14px; font-weight: 500;">🛍️ Ver Catálogo</a>
-  <a routerLink="/admin/productos/nuevo" style="color: white; text-decoration: none; font-size: 14px; font-weight: 500;">⚙️ Administrar / Nuevo</a>
+<nav style="background: #2d3748; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center;">
+  <div style="display: flex; gap: 20px;">
+    <a routerLink="/" style="color: white; text-decoration: none; font-size: 14px; font-weight: 500;">🛍️ Ver Catálogo</a>
+    <a routerLink="/admin/productos/nuevo" style="color: white; text-decoration: none; font-size: 14px; font-weight: 500;">⚙️ Administrar / Nuevo</a>
+  </div>
+
+  <!-- Botones de Logto -->
+  <div>
+    @if (logtoService.isAuthenticated()) {
+    <span style="color: white; margin-right: 15px; font-size: 14px;">¡Sesión iniciada!</span>
+    <button (click)="signOut()" style="background: #e53e3e; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 14px;">
+      Cerrar sesión
+    </button>
+    } @else {
+    <button (click)="signIn()" style="background: #3182ce; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 14px;">
+      Iniciar sesión (Carrito)
+    </button>
+    }
+  </div>
 </nav>
 
 <!-- AQUÍ ES DONDE SE CARGA EL CATÁLOGO -->

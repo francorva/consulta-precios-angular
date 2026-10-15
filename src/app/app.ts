@@ -1,20 +1,24 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router'; // Directiva para habilitar <router-outlet>
+import { RouterOutlet } from '@angular/router';
+import { LogtoService } from '@logto/angular';
 import { ProductoService } from './services/producto';
 import { Producto } from './models/producto.model';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet], // RouterOutlet declarado aquí
+  imports: [CommonModule, FormsModule, RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class AppComponent implements OnInit { // Renombrado a AppComponent
+export class AppComponent implements OnInit {
 
   private productoService = inject(ProductoService);
+
+  // Inyectamos LogtoService para la autenticación
+  public logtoService = inject(LogtoService);
 
   productos = signal<Producto[]>([]);
   cargando = signal(true);
@@ -32,6 +36,7 @@ export class AppComponent implements OnInit { // Renombrado a AppComponent
   precioMaxAplicado = signal<number>(60000000);
 
   ngOnInit(): void {
+    // Carga de productos de tu e-commerce
     this.productoService.getProductos().subscribe({
       next: (data) => {
         const productosProcesados = data.map(p => ({
@@ -60,6 +65,15 @@ export class AppComponent implements OnInit { // Renombrado a AppComponent
         this.cargando.set(false);
       }
     });
+  }
+
+  // Métodos de autenticación para Logto apuntando al callback correcto
+  async signIn() {
+    await this.logtoService.signIn('http://localhost:4200/callback');
+  }
+
+  async signOut() {
+    await this.logtoService.signOut('http://localhost:4200/');
   }
 
   obtenerRutaImagen(producto: any): string {

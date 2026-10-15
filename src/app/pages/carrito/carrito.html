@@ -1,0 +1,45 @@
+<div class="carrito-container">
+  <h2>🛒 Tu Carrito de Compras</h2>
+
+  <!-- SI EL CARRITO ESTÁ VACÍO -->
+  <div *ngIf="items.length === 0" class="carrito-vacio">
+    <p>No hay productos en el carrito.</p>
+  </div>
+
+  <!-- LISTA DE PRODUCTOS -->
+  <div *ngIf="items.length > 0">
+    <div class="tabla-carrito">
+      <div class="item-carrito" *ngFor="let item of items">
+        <div class="item-info">
+          <h4>{{ item.nombre }}</h4>
+          <p class="precio-unitario">Precio unitario: Gs {{ item.precio | number:'1.0-0' }}</p>
+
+          <!-- CONTROL DE CANTIDAD CON BOTONES + Y - -->
+          <div class="control-cantidad">
+            <span>Cant.:</span>
+            <button class="btn-cantidad" (click)="decrementar(item)">−</button>
+            <span class="numero-cantidad">{{ item.cantidad }}</span>
+            <button class="btn-cantidad" (click)="incrementar(item)">+</button>
+          </div>
+        </div>
+
+        <div class="item-acciones">
+          <p class="subtotal">Gs {{ (item.precio * item.cantidad) | number:'1.0-0' }}</p>
+          <button class="btn-eliminar" (click)="eliminar(item.id)">🗑️ Eliminar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOTAL Y ACCIONES -->
+    <div class="carrito-resumen">
+      <h3>Total: Gs {{ total | number:'1.0-0' }}</h3>
+
+      <div class="botones-acciones">
+        <button class="btn-vaciar" (click)="vaciar()">Vaciar Carrito</button>
+        <button class="btn-whatsapp" (click)="enviarWhatsApp()">
+          📲 Pedir por WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
